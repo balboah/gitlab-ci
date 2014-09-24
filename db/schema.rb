@@ -11,24 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140506091853) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20140924160700) do
 
   create_table "builds", force: true do |t|
     t.integer  "project_id"
     t.string   "ref"
     t.string   "status"
     t.datetime "finished_at"
-    t.text     "trace"
+    t.text     "trace",       limit: 2147483647
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "sha"
     t.datetime "started_at"
     t.string   "tmp_file"
     t.string   "before_sha"
-    t.text     "push_data"
+    t.text     "push_data",   limit: 16777215
     t.integer  "runner_id"
   end
 
@@ -45,7 +42,7 @@ ActiveRecord::Schema.define(version: 20140506091853) do
     t.string   "default_ref"
     t.string   "gitlab_url"
     t.boolean  "always_build",             default: false, null: false
-    t.integer  "polling_interval"
+    t.string   "polling_interval"
     t.boolean  "public",                   default: false, null: false
     t.string   "ssh_url_to_repo"
     t.integer  "gitlab_id"
